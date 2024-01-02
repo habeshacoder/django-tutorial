@@ -1,4 +1,35 @@
-{% extends 'base.html' %} {% block title %} My blog {% endblock %}
-{% block content %}
-dsjhfjk...
+{% extends 'base.html' %} 
+{% load  static  %}
+
+{% block title %} My blog {% endblock %}
+{% block css_files %}
+
+
+<link rel="stylesheet" href="{% static 'blog/index.css' %}">
+  
 {% endblock  %}
+{% block content %}
+
+<section id="welcome">
+    <header>
+        <img src="{% static 'blog/images/Ytprofile.png' %}" alt="Adoni the Author of This Blog">
+        <h2>Adonias Haile</h2>
+    </header>
+    <p>Hi, I am talking about Django</p>
+</section id="lates_posts">
+<h2>My Latest Thoughts</h2>
+<ul>
+  {% for post in posts  %}
+  
+  {% include "blog/includes/post.html" %}
+{% endfor %}
+</ul>
+<section id='about'>
+  <h2>What I do</h2>
+  <p>
+    Django is a powerful and popular web framework for building web applications using Python. It provides a high-level, efficient, and secure way to develop web applications, following the model-view-controller (MVC) architectural pattern.
+  </p>
+  <p>I Really Love  Django!</p>
+</section>
+<h2>Welcome to my blog</h2>
+{% endblock %}

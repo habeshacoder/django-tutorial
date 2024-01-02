@@ -1,0 +1,21 @@
+{% load static %}
+<li>
+  <article class="post">
+    <a href="{% url 'post_page_detail' 'sample' %}">
+      <img
+        src="{% static 'blog/images/'|add:post.image %}"
+        style="
+          width: 200px;
+          height: 200px;
+          border-radius: 50%;
+          object-fit: cover;
+        "
+        alt="{{post.title}}"
+      />
+      <div class="post_content">
+        <header>{{post.title}}</header>
+        <p>{{post.excerpt}}</p>
+      </div>
+    </a>
+  </article>
+</li>
