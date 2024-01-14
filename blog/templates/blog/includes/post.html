@@ -1,9 +1,9 @@
 {% load static %}
 <li>
   <article class="post">
-    <a href="{% url 'post_page_detail' 'sample' %}">
+    <a href="{% url 'post_page_detail' slug=post.slug %}">
       <img
-        src="{% static 'blog/images/'|add:post.image %}"
+        src="{% static 'blog/images/'|add:post.image_name %}"
         style="
           width: 200px;
           height: 200px;

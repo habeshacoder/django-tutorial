@@ -8,14 +8,20 @@ This post title
 {% block content %}
 <section id='summary'>
     
-    <h2>post title</h2>
+    <h2>{{post.title}}</h2>
+
     <article>
         <img src="{% static 'blog/images/banner.png' %}" style="width: 200px; height: 150px; border: 1px solid black" alt="Post title">
-        <address>By min idev camp</address>
+        <address>By <a href="mailto:{{post.author.email}}">{{post.author.email}}</a></address>
         <div>last updated on
             <time>july 05 </time>
         </div>
-        
+        <div>
+            <h2>captionS:</h2>
+            {% for tag in tags %}
+               <span>{{tag}}</span><br>
+            {% endfor %}
+        </div>
     </article>
 </section>
 <main>
