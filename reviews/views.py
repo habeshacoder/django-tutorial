@@ -47,7 +47,6 @@ class Review_List_View(TemplateView):
 
 class Single_Review_View(TemplateView):
     template_name = "reviews/review_detail.html"
-
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         print("kwargs:", kwargs)
@@ -55,3 +54,14 @@ class Single_Review_View(TemplateView):
         review = Review.objects.get(pk=selected_review_id)
         context["review"] = review
         return context
+
+
+class Add_Favorite_View(View):
+    def post(self, request):
+        review_id = request.POST["review_id"]
+        print('review_id:',review_id)
+        request.session["favorite_review"] = review_id
+        return HttpResponseRedirect("/reviews/" + review_id)
+    def get(self, request):
+        return HttpResponseRedirect("/reviews" )
+        # print('sample')

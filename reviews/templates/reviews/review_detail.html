@@ -6,8 +6,16 @@
     <title></title>
   </head>
   <body>
-    <p>{{review.name}}</p>
-    <p>{{review.review}}</p>
-    <p>{{review.rate}}</p>
+    <p>{{ review.name }}</p>
+    <p>{{ review.review }}</p>
+    <p>{{ review.rate }}</p>
+   
+
+      <form action="/reviews/favorite" method="POST">
+        {% csrf_token %}
+        <input type="hidden" name="review_id" value="{{ review.id }}" />
+        <button>Favorite</button>
+      </form>
+    </form>
   </body>
 </html>
