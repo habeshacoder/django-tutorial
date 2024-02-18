@@ -4,6 +4,7 @@ from .forms import ReviewForm
 from .models import Review
 from django.views import View
 from django.views.generic.base import TemplateView
+from django.views.generic.detail import DetailView
 
 
 # Create your views here.
@@ -45,23 +46,29 @@ class Review_List_View(TemplateView):
         return context
 
 
-class Single_Review_View(TemplateView):
+class Single_Review_View(DetailView):
     template_name = "reviews/review_detail.html"
+    model = Review
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         print("kwargs:", kwargs)
-        selected_review_id = kwargs["id"]
-        review = Review.objects.get(pk=selected_review_id)
-        context["review"] = review
+        loaded_review = self.object
+        request = self.request
+        favorite_id = request.session.get["favorite_review"]
+        print("favorite_ids:", loaded_review.id, favorite_id)
+        context["is_favorite"] = favorite_id == str(loaded_review.id)
+        print(' context["is_favorite"]:', context["is_favorite"])
         return context
 
 
 class Add_Favorite_View(View):
     def post(self, request):
         review_id = request.POST["review_id"]
-        print('review_id:',review_id)
+        print("review_id:", review_id)
         request.session["favorite_review"] = review_id
         return HttpResponseRedirect("/reviews/" + review_id)
+
     def get(self, request):
-        return HttpResponseRedirect("/reviews" )
+        return HttpResponseRedirect("/reviews")
         # print('sample')

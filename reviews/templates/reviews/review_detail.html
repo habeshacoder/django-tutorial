@@ -10,11 +10,16 @@
     <p>{{ review.review }}</p>
     <p>{{ review.rate }}</p>
    
+   {% if is_favorite %}
+    this is my favourite
+     
+    {% else %}
 
       <form action="/reviews/favorite" method="POST">
         {% csrf_token %}
         <input type="hidden" name="review_id" value="{{ review.id }}" />
         <button>Favorite</button>
+          {% endif %}
       </form>
     </form>
   </body>

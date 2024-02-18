@@ -8,10 +8,11 @@
   <body>
     <p>all reviews:</p>
     {% for review in reviews %}
-    <p>{{review.name}}</p>
-    <p>{{review.review}}</p>
-    <p>{{review.rate}}</p>
-
+    <a href="{% url 'reviews:review_detail' review.id %}">
+      <p>{{review.name}}</p>
+      <p>{{review.review}}</p>
+      <p>{{review.rate}}</p>
+    </a>
     <br />
     {% endfor %}
   </body>
